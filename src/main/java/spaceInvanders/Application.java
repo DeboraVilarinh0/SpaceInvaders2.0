@@ -1,5 +1,6 @@
 package spaceInvanders;
 
+import spaceInvanders.services.Game;
 import spaceInvanders.utility.Constants;
 
 import javax.sound.sampled.LineUnavailableException;

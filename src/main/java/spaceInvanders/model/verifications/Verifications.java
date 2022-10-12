@@ -11,38 +11,37 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.List;
 
-public class Verifications{
+public class Verifications {
     public int level = 1;
     int powerUpType;
     boolean fireMultipleBullets;
-    SimpleAudioPlayer audioPlayer= new SimpleAudioPlayer();
+    SimpleAudioPlayer audioPlayer = new SimpleAudioPlayer();
 
     public Verifications() throws UnsupportedAudioFileException, LineUnavailableException, IOException, InterruptedException {
     }
 
-    public void verifySpaceShipCollision(SpaceShip spaceShip,List<AlienFleet> alienFleet, List<Bullet> enemyBullets) throws UnsupportedAudioFileException, IOException, InterruptedException {
+    public void verifySpaceShipCollision(SpaceShip spaceShip, List<AlienFleet> alienFleet, List<Bullet> enemyBullets) throws UnsupportedAudioFileException, IOException, InterruptedException {
 
         for (AlienFleet monsters : alienFleet) {
             if (spaceShip.getPosition().equals(monsters.getPosition())) {
                 audioPlayer.stopBackgroundAudio();
                 audioPlayer.stopLastLevelAudio();
-                    audioPlayer.playDeathAudio();
-                    Thread.sleep(3000);
-                    System.exit(0);
-                }
+                audioPlayer.playDeathAudio();
+                Thread.sleep(3000);
+                System.exit(0);
             }
-
+        }
 
 
         for (Bullet enemyBullet : enemyBullets) {
             if (spaceShip.getPosition().equals(enemyBullet.getPosition())) {
 
-                    audioPlayer.stopBackgroundAudio();
-                    audioPlayer.stopLastLevelAudio();
-                    audioPlayer.playDeathAudio();
-                    System.out.println("You died!!!");
-                    Thread.sleep(3000);
-                    System.exit(0);
+                audioPlayer.stopBackgroundAudio();
+                audioPlayer.stopLastLevelAudio();
+                audioPlayer.playDeathAudio();
+                System.out.println("You died!!!");
+                Thread.sleep(3000);
+                System.exit(0);
             }
         }
     }
@@ -88,12 +87,14 @@ public class Verifications{
             }
         }
     }
+
     public void verifyCollisionBetweenBullets(List<Bullet> bullets, List<Bullet> enemyBullets) {
         for (int indexBullets = 0; indexBullets < bullets.size(); indexBullets++) {
 
             for (int indexBulletsAliens = 0; indexBulletsAliens < enemyBullets.size(); indexBulletsAliens++) {
 
-                if (bullets.get(indexBullets).getPosition().equals(enemyBullets.get(indexBulletsAliens).getPosition()) || bullets.get(indexBullets).bulletMovementUP().equals(enemyBullets.get(indexBulletsAliens).getPosition())) {
+                if (bullets.get(indexBullets).getPosition().equals(enemyBullets.get(indexBulletsAliens).getPosition())
+                        || bullets.get(indexBullets).bulletMovementUP().equals(enemyBullets.get(indexBulletsAliens).getPosition())) {
                     bullets.remove(indexBullets);
                     enemyBullets.remove(indexBulletsAliens);
                     break;
@@ -104,6 +105,7 @@ public class Verifications{
 
     public void verifyPowerUpCollision(SpaceShip spaceShip, List<PowerUps> powerUps) {
         for (int i = 0; i < powerUps.size(); i++) {
+
             if (powerUps.get(i).getPosition().equals(spaceShip.getPosition())) {
                 powerUpType = powerUps.get(i).getPowerUpType();
                 powerUps.remove(i);

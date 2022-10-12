@@ -9,8 +9,8 @@ public class DrawUtil {
         screen.newTextGraphics().putString(col, 3, "MENU");
         screen.newTextGraphics().putString(col, 9, "Press ENTER to process to the game");
         screen.newTextGraphics().putString(col, 11, "Press I for instructions");
-        screen.newTextGraphics().putString(col, 15, "Press DELETE to exit");
-        screen.newTextGraphics().putString(col, 20, "NOTE: To return to MainMenu press 'Q'");
+        screen.newTextGraphics().putString(col, 13, "Press F1 to exit");
+        screen.newTextGraphics().putString(col, 20, "NOTE: To return to mainmenu press BACKSPACE");
 
 
     }

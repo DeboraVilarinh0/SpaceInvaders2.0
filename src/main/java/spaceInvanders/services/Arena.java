@@ -1,4 +1,4 @@
-package spaceInvanders;
+package spaceInvanders.services;
 
 
 import com.googlecode.lanterna.TerminalPosition;
@@ -53,20 +53,15 @@ public class Arena {
     public List<AlienFleet> getAlienFleet() {
         return alienFleet;
     }
-
     public List<Bullet> getEnemyBullets() {
         return enemyBullets;
     }
-
     public List<Bullet> getBullets() {
         return bullets;
     }
-
-
     public SpaceShip getSpaceShip() {
         return spaceShip;
     }
-
 
     public void draw(TextGraphics graphics) {
         graphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
@@ -74,7 +69,6 @@ public class Arena {
 
         graphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(WIDTH, HEIGHT), ' ');
-
 
         spaceShip.drawElements(graphics, "#FFAE42", "&");
         if (bullets.size() != 0) {
@@ -131,6 +125,7 @@ public class Arena {
         }
 
     }
+
     public void shootBullet(long shotNumb) {
         if (alienFleet.size() != 0) {
             for (int i = 0; i < shotNumb; i++) {
@@ -143,8 +138,7 @@ public class Arena {
     }
 
     public boolean getIsInvincible() {
-        if (spaceShip.getIsInvincible()) return true;
-        else return false;
+        return spaceShip.getIsInvincible();
     }
     public void setIsInvincible(boolean isInvincible) {
         spaceShip.setIsInvincible(isInvincible);
@@ -174,8 +168,7 @@ public class Arena {
         this.runTimer = runTimer;
     }
     public boolean aliensIsEmpty() {
-        if (alienFleet.isEmpty()) return true;
-        else return false;
+        return alienFleet.isEmpty();
     }
 
 }

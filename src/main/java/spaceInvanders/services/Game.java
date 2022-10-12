@@ -1,4 +1,4 @@
-package spaceInvanders;
+package spaceInvanders.services;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -24,7 +24,6 @@ import java.io.IOException;
 public class Game {
 
     private Arena arena;
-
     TerminalScreen screen;
     boolean keepRunning = true;
     long shotTimer = 1000;
@@ -37,12 +36,12 @@ public class Game {
     MovementAlienFleet moveAlienFleet = new MovementAlienFleet();
     Verifications verifications = new Verifications();
     SimpleAudioPlayer audioPlayer = new SimpleAudioPlayer();
-    long quickFireCount=0;
-    long invincibleCount=0;
-    long multipleFireCount=0;
+    long quickFireCount = 0;
+    long invincibleCount = 0;
+    long multipleFireCount = 0;
 
 
-    Game(int Width, int Height) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
+    public Game(int Width, int Height) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
         AWTTerminalFontConfiguration cfg = new SwingTerminalFontConfiguration(true, AWTTerminalFontConfiguration.BoldMode.EVERYTHING, changeFont());
         TerminalSize terminalSize = new TerminalSize(Width, Height);
         DefaultTerminalFactory TerminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
@@ -59,7 +58,7 @@ public class Game {
 
     }
 
-    void drawMenu(TerminalScreen screen) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
+    public void drawMenu(TerminalScreen screen) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 
         screen.clear();
         DrawUtil.menuText(screen);
@@ -72,9 +71,7 @@ public class Game {
 
             if (keyPressed != null) {
                 switch (keyPressed.getKeyType()) {
-                    case Delete -> {
-                        //screen.close();
-                        //screen.stopScreen();
+                    case F1 -> {
                         keepRunning = false;
                     }
                     case Enter -> {
@@ -89,11 +86,6 @@ public class Game {
                                 drawInstruction(screen);
 
                             }
-
-                            case 'H', 'h' -> {
-
-                            }
-
                         }
                     }
 
@@ -107,7 +99,7 @@ public class Game {
 
         }
         screen.close();
-        //screen.stopScreen();
+
     }
 
     private void drawInstruction(TerminalScreen screen) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
@@ -115,17 +107,15 @@ public class Game {
 
         screen.clear();
         DrawUtil.instructionsText(screen);
-
         screen.refresh();
 
         while (keepRunning) {
             KeyStroke key = screen.pollInput();
 
             if (key != null) {
-                if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') {
-                    drawMenu(screen);
-                    break;
-
+                if (key.getKeyType() == KeyType.Backspace) {
+                   drawMenu(screen);
+                   break;
                 }
             }
         }
@@ -163,7 +153,7 @@ public class Game {
             KeyStroke key = screen.pollInput();
             if (key != null) {
 
-                if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') {
+                if (key.getKeyType() == KeyType.Backspace) {
                     drawMenu(screen);
 
                 }
@@ -180,12 +170,12 @@ public class Game {
                     verifications.verifySpaceShipCollision(arena.getSpaceShip(), arena.getAlienFleet(), arena.getEnemyBullets());
                 }
                 movementBullets.moveBullets(arena.getBullets(), arena.getEnemyBullets());
+
                 verifications.verifyAlienFleetCollision(arena.getBullets(), arena.getAlienFleet());
                 verifications.verifyCollisionBetweenBullets(arena.getBullets(), arena.getEnemyBullets());
-
                 verifications.verifyPowerUpCollision(arena.getSpaceShip(), arena.getPowerUps());
-
                 verifications.cleanBullet(arena.getBullets());
+
                 draw();
 
                 lastMonsterMovement = startTime;
