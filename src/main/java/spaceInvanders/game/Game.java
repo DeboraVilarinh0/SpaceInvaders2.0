@@ -1,4 +1,4 @@
-package spaceInvanders.services;
+package spaceInvanders.game;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -8,6 +8,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
+import spaceInvanders.arena.Arena;
 import spaceInvanders.model.createElements.CreateElements;
 import spaceInvanders.model.movements.MovementAlienFleet;
 import spaceInvanders.model.movements.MovementBullets;

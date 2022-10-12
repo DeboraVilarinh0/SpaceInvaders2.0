@@ -1,4 +1,4 @@
-package spaceInvanders.services;
+package spaceInvanders.arena;
 
 
 import com.googlecode.lanterna.TerminalPosition;
