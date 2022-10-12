@@ -124,7 +124,7 @@ public class Game {
     }
 
 
-    void draw() throws IOException {
+    public void draw() throws IOException {
         screen.clear();
         arena.draw(screen.newTextGraphics());
         screen.refresh();

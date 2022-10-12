@@ -9,12 +9,11 @@ public class SpaceShip extends Element {
     public void setFireMultipleBullets(boolean fireMultipleBullets) {
         this.fireMultipleBullets = fireMultipleBullets;
     }
+
     public boolean getFireMultipleBullets() {
         return fireMultipleBullets;
     }
-    public void setInvincible(boolean invincible) {
-        this.isInvincible = invincible;
-    }
+
     public SpaceShip(int x, int Height) {
         super(x, Height);
     }
@@ -34,7 +33,6 @@ public class SpaceShip extends Element {
     public int getShootFaster() {
         return shootFaster;
     }
-
 
 
 }
