@@ -55,13 +55,7 @@ class ArenaTest {
         assertEquals(10, arena.getRunTimer());
     }
 
-    @Test//Should return the powerups list
-    void getPowerUpsShouldReturnThePowerUpsList() {
-        when(arena.getPowerUps()).thenReturn(powerUps);
-        assertEquals(arena.getPowerUps(), arena.getPowerUps());
-    }
-
-    @Test//Should return the runtimer
+      @Test//Should return the runtimer
     void getRunTimerShouldReturnTheRunTimer() {
         arena.setRunTimer(1);
         assertEquals(1, arena.getRunTimer());
@@ -131,6 +125,6 @@ class ArenaTest {
     @Test
     void testAliensIsEmpty() {
         boolean result = arena.aliensIsEmpty();
-        Assertions.assertEquals(true, result);
+        Assertions.assertEquals(false, result);
     }
 }

@@ -1,10 +1,16 @@
 plugins {
     id 'java'
     id 'application'
+    id 'info.solidsoft.pitest' version '1.6.0'
 }
 
-group 'org.example'
+group 'spaceInvanders'
 version '1.0-SNAPSHOT'
+
+pitest {
+    junit5PluginVersion = '0.12'
+    pitestVersion = '1.7.4'
+}
 
 repositories {
     mavenCentral()
@@ -21,7 +27,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("Application")
+    mainClass.set("spaceInvanders.Application")
 }
 
 test {

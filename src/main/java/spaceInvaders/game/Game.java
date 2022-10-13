@@ -223,7 +223,7 @@ public class Game {
 
                 verifications.verifyAlienFleetCollision(this.arena.getBullets(), this.arena.getAlienFleet());
                 verifications.verifyCollisionBetweenBullets(this.arena.getBullets(), this.arena.getEnemyBullets());
-                verifications.verifyPowerUpCollision(this.arena.getSpaceShip(), this.arena.getPowerUps(), screen);
+                verifications.verifyPowerUpCollision(this.arena.getSpaceShip(), this.arena.getPowerUps());
                 verifications.cleanBullet(this.arena.getBullets());
 
 

@@ -25,9 +25,9 @@ public class Verifications {
 
         for (AlienFleet monsters : alienFleet) {
             if (spaceShip.getPosition().equals(monsters.getPosition())) {
-                audioPlayer.stopBackgroundAudio();
-                audioPlayer.stopLastLevelAudio();
-                audioPlayer.playDeathAudio();
+                //audioPlayer.stopBackgroundAudio();
+                //audioPlayer.stopLastLevelAudio();
+                //audioPlayer.playDeathAudio();
                 Thread.sleep(3000);
                 System.exit(0);
             }
@@ -37,9 +37,9 @@ public class Verifications {
         for (Bullet enemyBullet : enemyBullets) {
             if (spaceShip.getPosition().equals(enemyBullet.getPosition())) {
 
-                audioPlayer.stopBackgroundAudio();
-                audioPlayer.stopLastLevelAudio();
-                audioPlayer.playDeathAudio();
+                //audioPlayer.stopBackgroundAudio();
+                //audioPlayer.stopLastLevelAudio();
+                //audioPlayer.playDeathAudio();
                 System.out.println("You died!!!");
                 Thread.sleep(3000);
                 System.exit(0);
@@ -104,7 +104,7 @@ public class Verifications {
         }
     }
 
-    public void verifyPowerUpCollision(SpaceShip spaceShip, List<PowerUps> powerUps, TerminalScreen screen) throws IOException {
+    public void verifyPowerUpCollision(SpaceShip spaceShip, List<PowerUps> powerUps) {
         for (int i = 0; i < powerUps.size(); i++) {
 
             if (powerUps.get(i).getPosition().equals(spaceShip.getPosition())) {
