@@ -10,6 +10,7 @@ import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
 import spaceInvaders.arena.Arena;
 import spaceInvaders.entities.Bullet;
+import spaceInvaders.entities.SpaceShip;
 import spaceInvaders.model.Position;
 import spaceInvaders.model.createElements.CreateElements;
 import spaceInvaders.model.movements.MovementAlienFleet;
@@ -84,12 +85,13 @@ public class Game {
                     case Enter -> {
 
                         audioPlayer.playBackgroundAudio();
-
+                        arena.setSpaceShip(new SpaceShip(Constants.WIDTH / 2, Constants.HEIGHT - 1));
                         createElements.setAlienFleet(new ArrayList<>());
                         arena.setBullets(new ArrayList<>());
                         arena.setEnemyBullets(new ArrayList<>());
                         arena.setPowerUps(new ArrayList<>());
 
+                        arena.setSpaceShipHP(new ArrayList<>());
                         arena.setAlienFleet(createElements.createAlienFleet(20, 5));
 
                         run();
@@ -130,6 +132,7 @@ public class Game {
 
             if (key != null) {
                 if (key.getKeyType() == KeyType.Backspace) {
+
                     drawMenu(screen);
                     break;
                 }
@@ -162,10 +165,6 @@ public class Game {
         long lastMonsterMovement = 0;
         long lastMonsterMovement2 = 0;
         long powerUpActivated = 0;
-        long powerUp1Activated = 0;
-        long powerUp2Activated = 0;
-        long powerUp3Activated = 0;
-
 
         while (keepRunning) {
 
@@ -175,10 +174,11 @@ public class Game {
             if (key != null) {
 
                 if (key.getKeyType() == KeyType.Backspace) {
+                    arena.getBullets().clear();
+                    arena.getEnemyBullets().clear();
+                    arena.getPowerUps().clear();
+                    arena.removeSpaceShip(arena.getSpaceShip());
                     audioPlayer.stopBackgroundAudio();
-                    arena.setBullets(new ArrayList<>());
-                    arena.setEnemyBullets(new ArrayList<>());
-                    arena.setPowerUps(new ArrayList<>());
                     screen.clear();
                     drawMenu(screen);
                     screen.refresh();
@@ -189,7 +189,7 @@ public class Game {
                 }
 
 
-                if (key.getKeyType() == KeyType.F2) {
+                if (key.getCharacter() == 'p' || key.getCharacter() == 'P') {
                     audioPlayer.stopBackgroundAudio();
                     drawPause(screen);
                     if (key.getKeyType() == KeyType.F2) {

@@ -125,6 +125,6 @@ class ArenaTest {
     @Test
     void testAliensIsEmpty() {
         boolean result = arena.aliensIsEmpty();
-        Assertions.assertEquals(false, result);
+        Assertions.assertEquals(true, result);
     }
 }

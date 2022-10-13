@@ -112,7 +112,7 @@ public class Verifications {
         }
     }
 
-    public void verifyPowerUpCollision(SpaceShip spaceShip, List<PowerUps> powerUps, TerminalScreen screen) throws IOException {
+    public void verifyPowerUpCollision(SpaceShip spaceShip, List<PowerUps> powerUps) throws IOException {
         for (int i = 0; i < powerUps.size(); i++) {
 
             if (powerUps.get(i).getPosition().equals(spaceShip.getPosition())) {

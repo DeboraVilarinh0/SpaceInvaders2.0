@@ -1,10 +1,7 @@
 package spaceInvaders.model.createElements;
 
 
-import spaceInvaders.entities.Alien;
-import spaceInvaders.entities.AlienFleet;
-import spaceInvaders.entities.Bullet;
-import spaceInvaders.entities.PowerUps;
+import spaceInvaders.entities.*;
 import spaceInvaders.model.Position;
 import spaceInvaders.utility.Constants;
 import spaceInvaders.utility.SimpleAudioPlayer;
@@ -35,10 +32,10 @@ public class CreateElements {
         for (int row = 0; row < Height; row++) {
             for (int column = 0; column < Width; column += 3) {
                 if (alienLVL2) {
-                    alienFleet.add(new Alien(column + (50 - Width) / 2, row+2, 1));
+                    alienFleet.add(new Alien(column + (Constants.WIDTH - Width) / 2, row+2, 1));
                     alienLVL2 = false;
                 } else {
-                    alienFleet.add(new Alien(column + (50 - Width) / 2, row+2, 0));
+                    alienFleet.add(new Alien(column + (Constants.WIDTH - Width) / 2, row+2, 0));
                     alienLVL2 = true;
                 }
             }

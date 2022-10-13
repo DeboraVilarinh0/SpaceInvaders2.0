@@ -4,7 +4,7 @@ plugins {
     id 'info.solidsoft.pitest' version '1.6.0'
 }
 
-group 'spaceInvanders'
+group 'spaceInvaders'
 version '1.0-SNAPSHOT'
 
 pitest {
@@ -27,7 +27,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("spaceInvanders.Application")
+    mainClass.set("spaceInvaders.Application")
 }
 
 test {
