@@ -7,10 +7,7 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
-import spaceInvaders.entities.AlienFleet;
-import spaceInvaders.entities.Bullet;
-import spaceInvaders.entities.PowerUps;
-import spaceInvaders.entities.SpaceShip;
+import spaceInvaders.entities.*;
 import spaceInvaders.model.createElements.CreateElements;
 import spaceInvaders.model.movements.MovementSpaceship;
 import spaceInvaders.utility.Constants;
@@ -39,8 +36,7 @@ public class Arena {
 
 
 
-
-    public Arena() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public Arena(CreateElements createElements) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 
         this.spaceShip = new SpaceShip(WIDTH / 2, HEIGHT - 1);
         this.alienFleet = new ArrayList<>();
@@ -66,15 +62,12 @@ public class Arena {
     public List<AlienFleet> getAlienFleet() {
         return alienFleet;
     }
-
     public List<Bullet> getEnemyBullets() {
         return enemyBullets;
     }
-
     public List<Bullet> getBullets() {
         return bullets;
     }
-
     public SpaceShip getSpaceShip() {
         return spaceShip;
     }
@@ -92,17 +85,24 @@ public class Arena {
                 bullet.drawElements(graphics, "#FFFFFF", "_");
             }
         }
+
+        if (spaceShip.getSpaceShipHP().size() != 0) {
+            for (SpaceShipHP spaceShipHP : spaceShip.getSpaceShipHP()) {
+                spaceShipHP.drawElements(graphics, "#FF0000", "<");
+            }
+        }
+
         if (enemyBullets.size() != 0) {
             for (Bullet enemyBullet : enemyBullets) {
-                enemyBullet.drawElements(graphics, "#FFFFFF", "'");
+                enemyBullet.drawElements(graphics, "#FFFFFF", ";");
             }
         }
 
         if (!powerUps.isEmpty()) {
             for (PowerUps powerUp : powerUps) {
-                if (powerUp.getPowerUpType() == 0) powerUp.drawElements(graphics, "#bff8ff", "o");
-                if (powerUp.getPowerUpType() == 1) powerUp.drawElements(graphics, "#f5dc00", "o");
-                if (powerUp.getPowerUpType() == 2) powerUp.drawElements(graphics, "#FDCAFF", "o");
+                if (powerUp.getPowerUpType() == 0) powerUp.drawElements(graphics, "#bff8ff", "~");
+                if (powerUp.getPowerUpType() == 1) powerUp.drawElements(graphics, "#f5dc00", "~");
+                if (powerUp.getPowerUpType() == 2) powerUp.drawElements(graphics, "#FDCAFF", "~");
             }
         }
         for (AlienFleet alien : alienFleet) {
@@ -156,11 +156,9 @@ public class Arena {
     public boolean getIsInvincible() {
         return spaceShip.getIsInvincible();
     }
-
     public void setIsInvincible(boolean isInvincible) {
         spaceShip.setIsInvincible(isInvincible);
     }
-
     public void setShootFaster(int shootFaster) {
         spaceShip.setShootFaster(shootFaster);
     }
@@ -168,7 +166,6 @@ public class Arena {
     public int getShootFaster() {
         return spaceShip.getShootFaster();
     }
-
     public void setFireMultipleBullets(boolean fireMultipleBullets) {
         spaceShip.setFireMultipleBullets(fireMultipleBullets);
     }
@@ -184,15 +181,12 @@ public class Arena {
     public void setPowerUps(List<PowerUps> powerUps) {
         this.powerUps = powerUps;
     }
-
     public long getRunTimer() {
         return runTimer;
     }
-
     public void setRunTimer(long runTimer) {
         this.runTimer = runTimer;
     }
-
     public boolean aliensIsEmpty() {
         return alienFleet.isEmpty();
     }

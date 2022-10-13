@@ -35,10 +35,10 @@ public class CreateElements {
         for (int row = 0; row < Height; row++) {
             for (int column = 0; column < Width; column += 3) {
                 if (alienLVL2) {
-                    alienFleet.add(new Alien(column + (50 - Width) / 2, row, 1));
+                    alienFleet.add(new Alien(column + (50 - Width) / 2, row+2, 1));
                     alienLVL2 = false;
                 } else {
-                    alienFleet.add(new Alien(column + (50 - Width) / 2, row, 0));
+                    alienFleet.add(new Alien(column + (50 - Width) / 2, row+2, 0));
                     alienLVL2 = true;
                 }
             }
@@ -60,7 +60,6 @@ public class CreateElements {
             bullets.add(new Bullet(position.getX() + 1, position.getY() - 1));
             audioPlayer.restartBulletsAudio();
         }
-        System.out.println(bullets.size());
         return bullets;
     }
 

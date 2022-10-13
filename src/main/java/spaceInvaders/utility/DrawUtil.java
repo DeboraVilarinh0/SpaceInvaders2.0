@@ -7,7 +7,7 @@ public class DrawUtil {
 
     public static void menuText(TerminalScreen screen) {
         screen.newTextGraphics().putString(col, 3, "MENU");
-        screen.newTextGraphics().putString(col, 9, "press ENTER to process to the game");
+        screen.newTextGraphics().putString(col, 9, "press ENTER to start the game");
         screen.newTextGraphics().putString(col, 11, "press I for instructions");
         screen.newTextGraphics().putString(col,13, "press F2 to PAUSE or UNPAUSE the game");
         screen.newTextGraphics().putString(col, 15, "press F4 to exit");

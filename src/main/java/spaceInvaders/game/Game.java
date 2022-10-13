@@ -30,7 +30,6 @@ import java.util.List;
 public class Game {
 
     private Arena arena;
-
     TerminalScreen screen;
     boolean keepRunning = true;
     long shotTimer = 1000;
@@ -55,7 +54,7 @@ public class Game {
         TerminalFactory.setTerminalEmulatorFontConfiguration(cfg);
         Terminal terminal = TerminalFactory.createTerminal();
 
-        arena = new Arena();
+        arena = new Arena(createElements);
 
         screen = new TerminalScreen(terminal);
         screen.setCursorPosition(null); // we don't need a cursor
@@ -94,9 +93,7 @@ public class Game {
                         arena.setAlienFleet(createElements.createAlienFleet(20, 5));
 
                         run();
-
                     }
-
                     case Character -> {
 
                         switch (keyPressed.getCharacter()) {
@@ -147,7 +144,6 @@ public class Game {
         screen.clear();
         DrawUtil.drawPause(screen);
         screen.refresh();
-
     }
 
 
@@ -174,7 +170,6 @@ public class Game {
         while (keepRunning) {
 
             long startTime = System.currentTimeMillis();
-
 
             KeyStroke key = screen.pollInput();
             if (key != null) {
@@ -210,9 +205,7 @@ public class Game {
                     break;
                 }
             }
-
             draw();
-
 
             if (startTime - lastMonsterMovement > moveTimer) {
                 moveAlienFleet.moveAlienFleet(this.arena.getAlienFleet());
@@ -243,7 +236,7 @@ public class Game {
             if (this.arena.getShootFaster() == 0) {
                 quickFireCount++;
                 for (int i = 0; i <= 1; i++) {
-                    screen.newTextGraphics().putString(Constants.WIDTH / 2 - 10, Constants.HEIGHT / 2, "power up: SHOOT FASTER");
+                    screen.newTextGraphics().putString(Constants.WIDTH / 2 - 10, 1, "power up: SHOOT FASTER");
                     screen.refresh();
                     i++;
                 }
@@ -259,7 +252,7 @@ public class Game {
             if (this.arena.getIsInvincible()) {
                 invincibleCount++;
                 for (int i = 0; i <= 1; i++) {
-                    screen.newTextGraphics().putString(Constants.WIDTH / 2 - 10, Constants.HEIGHT / 2, "power up: INVINCIBLE");
+                    screen.newTextGraphics().putString(Constants.WIDTH / 2 - 10, 1, "power up: INVINCIBLE");
                     screen.refresh();
                     i++;
                 }
@@ -274,7 +267,7 @@ public class Game {
             if (this.arena.getFireMultipleBullets()) {
                 multipleFireCount++;
                 for (int i = 0; i <= 1; i++) {
-                    screen.newTextGraphics().putString(Constants.WIDTH / 2 - 10, Constants.HEIGHT / 2, "power up: MULTIPLE BULLETS");
+                    screen.newTextGraphics().putString(Constants.WIDTH / 2 - 10, 1, "power up: MULTIPLE BULLETS");
                     screen.refresh();
                     i++;
 
@@ -287,24 +280,6 @@ public class Game {
                 }
             }
 
-
-            if (startTime - powerUp1Activated > powerUpTimer) {
-                this.arena.setShootFaster(3);
-                powerUp1Activated = startTime;
-
-            }
-
-            if (startTime - powerUp2Activated > powerUpTimer) {
-                this.arena.setIsInvincible(false);
-                powerUp2Activated = startTime;
-            }
-
-            if (startTime - powerUp3Activated > powerUpTimer) {
-                this.arena.setFireMultipleBullets(false);
-                powerUp3Activated = startTime;
-
-            }
-
             if (this.arena.aliensIsEmpty() && this.arena.getRunTimer() < 80) {
                 audioPlayer.stopBackgroundAudio();
                 audioPlayer.playLastLevelAudio();
@@ -313,20 +288,19 @@ public class Game {
             }
 
 
-            switch (verifications.level(this.arena.getAlienFleet())) {
+            switch (verifications.level(this.arena.getAlienFleet(), arena.getRunTimer())) {
                 case 2 -> {
                     for (int i = 0; i <= 1; i++) {
                         screen.newTextGraphics().putString(Constants.WIDTH / 2 - 10, Constants.HEIGHT / 2, "level: 2");
                         screen.refresh();
                         i++;
-
                     }
-                    audioPlayer.stopBackgroundAudio();
-                    audioPlayer.playLastLevelAudio();
+                    this.arena.setRunTimer(0);
                     shotTimer = 300;
                     shotNumb = 3;
                     moveTimer = 60;
                     createElements.createAlienFleet(25, 5);
+                    System.out.println("ENTREI NO 2");
                     playedLevelTwo = true;
                 }
                 case 3 -> {
@@ -336,6 +310,7 @@ public class Game {
                         i++;
 
                     }
+                    this.arena.setRunTimer(0);
                     shotTimer = 10;
                     shotNumb = 5;
                     moveTimer = 30;
