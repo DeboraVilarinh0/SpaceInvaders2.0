@@ -19,7 +19,6 @@ import java.util.Random;
 public class CreateElements {
 
 
-
     private List<AlienFleet> alienFleet = new ArrayList<>();
     private final List<Bullet> bullets = new ArrayList<>();
     private final List<Bullet> enemyBullets = new ArrayList<>();

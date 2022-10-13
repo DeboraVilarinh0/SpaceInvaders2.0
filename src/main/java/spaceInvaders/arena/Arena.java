@@ -38,6 +38,8 @@ public class Arena {
     long runTimer = 0;
 
 
+
+
     public Arena() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 
         this.spaceShip = new SpaceShip(WIDTH / 2, HEIGHT - 1);
@@ -51,6 +53,14 @@ public class Arena {
 
     public void setAlienFleet(List<AlienFleet> alienFleet) {
         this.alienFleet = alienFleet;
+    }
+
+    public void setBullets(List<Bullet> bullets) {
+        this.bullets = bullets;
+    }
+
+    public void setEnemyBullets(List<Bullet> enemyBullets) {
+        this.enemyBullets = enemyBullets;
     }
 
     public List<AlienFleet> getAlienFleet() {

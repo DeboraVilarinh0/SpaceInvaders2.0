@@ -9,6 +9,8 @@ import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
 import spaceInvaders.arena.Arena;
+import spaceInvaders.entities.Bullet;
+import spaceInvaders.model.Position;
 import spaceInvaders.model.createElements.CreateElements;
 import spaceInvaders.model.movements.MovementAlienFleet;
 import spaceInvaders.model.movements.MovementBullets;
@@ -23,6 +25,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Game {
 
@@ -82,12 +85,18 @@ public class Game {
                     case Enter -> {
 
                         audioPlayer.playBackgroundAudio();
+
                         createElements.setAlienFleet(new ArrayList<>());
+                        arena.setBullets(new ArrayList<>());
+                        arena.setEnemyBullets(new ArrayList<>());
+                        arena.setPowerUps(new ArrayList<>());
+
                         arena.setAlienFleet(createElements.createAlienFleet(20, 5));
 
                         run();
 
                     }
+
                     case Character -> {
 
                         switch (keyPressed.getCharacter()) {
@@ -138,6 +147,7 @@ public class Game {
         screen.clear();
         DrawUtil.drawPause(screen);
         screen.refresh();
+
     }
 
 
@@ -171,6 +181,9 @@ public class Game {
 
                 if (key.getKeyType() == KeyType.Backspace) {
                     audioPlayer.stopBackgroundAudio();
+                    arena.setBullets(new ArrayList<>());
+                    arena.setEnemyBullets(new ArrayList<>());
+                    arena.setPowerUps(new ArrayList<>());
                     screen.clear();
                     drawMenu(screen);
                     screen.refresh();
@@ -184,6 +197,10 @@ public class Game {
                 if (key.getKeyType() == KeyType.F2) {
                     audioPlayer.stopBackgroundAudio();
                     drawPause(screen);
+                    if (key.getKeyType() == KeyType.F2) {
+
+                    }
+
                     break;
                 }
 
@@ -193,7 +210,9 @@ public class Game {
                     break;
                 }
             }
+
             draw();
+
 
             if (startTime - lastMonsterMovement > moveTimer) {
                 moveAlienFleet.moveAlienFleet(this.arena.getAlienFleet());
