@@ -213,14 +213,16 @@ public class Game {
             }
             if (arena.getShootFaster() == 0) {
                 quickFireCount++;
+                System.out.println(quickFireCount);
                 for (int i = 0; i <= 1; i++) {
-                    screen.newTextGraphics().putString(Constants.WIDTH / 2 - 10, Constants.HEIGHT / 2, "power up: SHOOT FASTER");
+                    screen.newTextGraphics().putString(Constants.WIDTH / 2 - 10, 1, "power up: SHOOT FASTER");
                     screen.refresh();
                     i++;
                 }
 
                 if (quickFireCount == 100) {
                     quickFireCount = 0;
+                    screen.refresh();
                     arena.setShootFaster(6);
 
                 }
@@ -229,14 +231,16 @@ public class Game {
 
             if (arena.getIsInvincible()) {
                 invincibleCount++;
+                System.out.println(invincibleCount);
                 for (int i = 0; i <= 1; i++) {
-                    screen.newTextGraphics().putString(Constants.WIDTH / 2 - 10, Constants.HEIGHT / 2, "power up: INVINCIBLE");
+                    screen.newTextGraphics().putString(Constants.WIDTH / 2 - 10, 1, "power up: INVINCIBLE");
                     screen.refresh();
                     i++;
                 }
 
                 if (invincibleCount == 100) {
                     invincibleCount = 0;
+                    screen.refresh();
                     arena.setIsInvincible(false);
 
                 }
@@ -244,8 +248,9 @@ public class Game {
 
             if (arena.getFireMultipleBullets()) {
                 multipleFireCount++;
+                System.out.println(multipleFireCount);
                 for (int i = 0; i <= 1; i++) {
-                    screen.newTextGraphics().putString(Constants.WIDTH / 2 - 10, Constants.HEIGHT / 2, "power up: MULTIPLE BULLETS");
+                    screen.newTextGraphics().putString(Constants.WIDTH / 2 - 10, 1, "power up: MULTIPLE BULLETS");
                     screen.refresh();
                     i++;
 
@@ -253,27 +258,9 @@ public class Game {
 
                 if (multipleFireCount == 100) {
                     multipleFireCount = 0;
+                    screen.refresh();
                     arena.setFireMultipleBullets(false);
-
                 }
-            }
-
-
-            if (startTime - powerUp1Activated > powerUpTimer) {
-                arena.setShootFaster(3);
-                powerUp1Activated = startTime;
-
-            }
-
-            if (startTime - powerUp2Activated > powerUpTimer) {
-                arena.setIsInvincible(false);
-                powerUp2Activated = startTime;
-            }
-
-            if (startTime - powerUp3Activated > powerUpTimer) {
-                arena.setFireMultipleBullets(false);
-                powerUp3Activated = startTime;
-
             }
 
             if (arena.aliensIsEmpty() && arena.getRunTimer() < 80) {
@@ -284,10 +271,9 @@ public class Game {
             }
 
 
-            switch (verifications.level(arena.getAlienFleet())) {
+            switch (verifications.level(arena.getAlienFleet(), arena.getRunTimer())) {
                 case 2 -> {
-                    audioPlayer.stopBackgroundAudio();
-                    audioPlayer.playLastLevelAudio();
+                    arena.setRunTimer(0);
                     shotTimer = 300;
                     shotNumb = 3;
                     moveTimer = 60;

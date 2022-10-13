@@ -11,6 +11,7 @@ import spaceInvanders.entities.AlienFleet;
 import spaceInvanders.entities.Bullet;
 import spaceInvanders.entities.PowerUps;
 import spaceInvanders.entities.SpaceShip;
+import spaceInvanders.model.Position;
 import spaceInvanders.model.createElements.CreateElements;
 import spaceInvanders.model.movements.MovementSpaceship;
 import spaceInvanders.utility.Constants;

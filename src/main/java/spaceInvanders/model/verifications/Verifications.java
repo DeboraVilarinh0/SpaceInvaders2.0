@@ -49,8 +49,8 @@ public class Verifications {
     }
 
 
-    public int level(List<AlienFleet> alienFleet) {
-        if (alienFleet.isEmpty()) {
+    public int level(List<AlienFleet> alienFleet, long runTimer) {
+        if (alienFleet.isEmpty() && runTimer==80) {
             level += 1;
             System.out.print("o nivel é   ");
             System.out.println(level);
