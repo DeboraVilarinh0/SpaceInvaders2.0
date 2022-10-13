@@ -15,7 +15,7 @@ import java.util.List;
 public class Verifications {
     public int level = 1;
     int powerUpType;
-    boolean fireMultipleBullets;
+
     SimpleAudioPlayer audioPlayer = new SimpleAudioPlayer();
 
     public Verifications() throws UnsupportedAudioFileException, LineUnavailableException, IOException, InterruptedException {
@@ -25,31 +25,39 @@ public class Verifications {
 
         for (AlienFleet monsters : alienFleet) {
             if (spaceShip.getPosition().equals(monsters.getPosition())) {
-                audioPlayer.stopBackgroundAudio();
-                audioPlayer.stopLastLevelAudio();
-                audioPlayer.playDeathAudio();
-                Thread.sleep(3000);
-                System.exit(0);
+                if (spaceShip.getSpaceShipHP().size() >= 2) {
+                    spaceShip.getSpaceShipHP().remove(spaceShip.getSpaceShipHP().size() - 1);
+                } else {
+                    audioPlayer.stopBackgroundAudio();
+                    audioPlayer.stopLastLevelAudio();
+                    audioPlayer.playDeathAudio();
+                    Thread.sleep(3000);
+                    System.exit(0);
+                }
+
             }
         }
 
 
         for (Bullet enemyBullet : enemyBullets) {
             if (spaceShip.getPosition().equals(enemyBullet.getPosition())) {
-
-                audioPlayer.stopBackgroundAudio();
-                audioPlayer.stopLastLevelAudio();
-                audioPlayer.playDeathAudio();
-                System.out.println("You died!!!");
-                Thread.sleep(3000);
-                System.exit(0);
+                if (spaceShip.getSpaceShipHP().size() >= 2) {
+                    spaceShip.getSpaceShipHP().remove(spaceShip.getSpaceShipHP().size() - 1);
+                } else {
+                    audioPlayer.stopBackgroundAudio();
+                    audioPlayer.stopLastLevelAudio();
+                    audioPlayer.playDeathAudio();
+                    System.out.println("You died!!!");
+                    Thread.sleep(3000);
+                    System.exit(0);
+                }
             }
         }
     }
 
 
     public int level(List<AlienFleet> alienFleet, long runTimer) {
-        if (alienFleet.isEmpty() && runTimer==80) {
+        if (alienFleet.isEmpty() && runTimer == 80) {
             level += 1;
             System.out.print("o nivel é   ");
             System.out.println(level);

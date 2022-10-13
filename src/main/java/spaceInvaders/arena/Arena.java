@@ -7,10 +7,7 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
-import spaceInvaders.entities.AlienFleet;
-import spaceInvaders.entities.Bullet;
-import spaceInvaders.entities.PowerUps;
-import spaceInvaders.entities.SpaceShip;
+import spaceInvaders.entities.*;
 import spaceInvaders.model.createElements.CreateElements;
 import spaceInvaders.model.movements.MovementSpaceship;
 import spaceInvaders.utility.Constants;
@@ -88,17 +85,24 @@ public class Arena {
                 bullet.drawElements(graphics, "#FFFFFF", "_");
             }
         }
+
+        if (spaceShip.getSpaceShipHP().size() != 0) {
+            for (SpaceShipHP spaceShipHP : spaceShip.getSpaceShipHP()) {
+                spaceShipHP.drawElements(graphics, "#FF0000", "<");
+            }
+        }
+
         if (enemyBullets.size() != 0) {
             for (Bullet enemyBullet : enemyBullets) {
-                enemyBullet.drawElements(graphics, "#FFFFFF", "'");
+                enemyBullet.drawElements(graphics, "#FFFFFF", ";");
             }
         }
 
         if (!powerUps.isEmpty()) {
             for (PowerUps powerUp : powerUps) {
-                if (powerUp.getPowerUpType() == 0) powerUp.drawElements(graphics, "#bff8ff", "o");
-                if (powerUp.getPowerUpType() == 1) powerUp.drawElements(graphics, "#f5dc00", "o");
-                if (powerUp.getPowerUpType() == 2) powerUp.drawElements(graphics, "#FDCAFF", "o");
+                if (powerUp.getPowerUpType() == 0) powerUp.drawElements(graphics, "#bff8ff", "~");
+                if (powerUp.getPowerUpType() == 1) powerUp.drawElements(graphics, "#f5dc00", "~");
+                if (powerUp.getPowerUpType() == 2) powerUp.drawElements(graphics, "#FDCAFF", "~");
             }
         }
         for (AlienFleet alien : alienFleet) {
