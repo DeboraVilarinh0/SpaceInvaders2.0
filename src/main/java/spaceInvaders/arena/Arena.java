@@ -25,11 +25,12 @@ public class Arena {
     static int WIDTH = Constants.WIDTH;
     static int HEIGHT = Constants.HEIGHT;
 
-    private final SpaceShip spaceShip;
+    private  SpaceShip spaceShip;
     private List<Bullet> bullets;
     private List<Bullet> enemyBullets;
     private List<PowerUps> powerUps;
     private List<AlienFleet> alienFleet;
+    private List<SpaceShipHP> spaceShipHP;
 
     CreateElements createElements = new CreateElements();
     long runTimer = 0;
@@ -43,6 +44,7 @@ public class Arena {
         this.bullets = new ArrayList<>();
         this.enemyBullets = new ArrayList<>();
         this.powerUps = new ArrayList<>();
+        this.spaceShipHP =  new ArrayList<>();
 
 
     }
@@ -181,6 +183,9 @@ public class Arena {
     public void setPowerUps(List<PowerUps> powerUps) {
         this.powerUps = powerUps;
     }
+    public void setSpaceShipHP(List<SpaceShipHP> spaceShipHP){
+        this.spaceShipHP=spaceShipHP;
+    }
     public long getRunTimer() {
         return runTimer;
     }
@@ -189,6 +194,13 @@ public class Arena {
     }
     public boolean aliensIsEmpty() {
         return alienFleet.isEmpty();
+    }
+
+    public void removeSpaceShip (SpaceShip spaceShip){
+this.spaceShip = null;
+    }
+    public void setSpaceShip (SpaceShip spaceShip){
+        this.spaceShip=spaceShip;
     }
 
 }

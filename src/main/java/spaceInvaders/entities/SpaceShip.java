@@ -46,5 +46,6 @@ public class SpaceShip extends Element {
     public List<SpaceShipHP> getSpaceShipHP() {
         return spaceShipHP;
     }
+
 }
 
