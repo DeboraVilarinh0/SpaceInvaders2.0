@@ -7,10 +7,12 @@ public class DrawUtil {
 
     public static void menuText(TerminalScreen screen) {
         screen.newTextGraphics().putString(col, 3, "MENU");
-        screen.newTextGraphics().putString(col, 9, "Press ENTER to process to the game");
-        screen.newTextGraphics().putString(col, 11, "Press I for instructions");
-        screen.newTextGraphics().putString(col, 13, "Press F1 to exit");
+        screen.newTextGraphics().putString(col, 9, "press ENTER to process to the game");
+        screen.newTextGraphics().putString(col, 11, "press I for instructions");
+        screen.newTextGraphics().putString(col,13, " press F2 to pause the game");
+        screen.newTextGraphics().putString(col, 15, "press F4 to exit");
         screen.newTextGraphics().putString(col, 20, "NOTE: To return to mainmenu press BACKSPACE");
+
 
 
     }
@@ -43,11 +45,16 @@ public class DrawUtil {
         screen.newTextGraphics().putString(col, 25, "*            ARROW UP    --> shooting              *");
         screen.newTextGraphics().putString(col, 26, "*            ARROW LEFT  --> moves left            *");
         screen.newTextGraphics().putString(col, 27, "*            ARROW RIGHT --> moves right           *");
-        screen.newTextGraphics().putString(col, 28, "*            Q           --> quit             *");
+        screen.newTextGraphics().putString(col, 28, "*            F4          --> quit             *");
         screen.newTextGraphics().putString(col, 29, "*                                                  *");
-        screen.newTextGraphics().putString(col, 30, "*               press Q to go back                 *");
+        screen.newTextGraphics().putString(col, 30, "*           press BACKSPACE to go back            *");
         screen.newTextGraphics().putString(col, 31, "****************************************************");
 
+
+    }
+
+    public static void drawPause(TerminalScreen screen){
+        screen.newTextGraphics().putString(Constants.WIDTH/2-5, Constants.HEIGHT/2, "PAUSE");
 
     }
 

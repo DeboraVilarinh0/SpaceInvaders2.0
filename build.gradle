@@ -1,14 +1,10 @@
 plugins {
     id 'java'
-    id 'info.solidsoft.pitest' version '1.6.0'
-    id 'groovy'
-
+    id 'application'
 }
 
-group 'com.bmcl.numbers'
+group 'org.example'
 version '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -20,13 +16,14 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:3.7.7'
     testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
     testImplementation 'org.codehaus.groovy:groovy-all:3.0.8'
+    implementation group: 'com.googlecode.lanterna', name: 'lanterna', version: '3.1.1'
+
 }
 
+application {
+    mainClass.set("Application")
+}
 
 test {
     useJUnitPlatform()
-}
-
-pitest {
-    junit5PluginVersion = '0.12'
 }

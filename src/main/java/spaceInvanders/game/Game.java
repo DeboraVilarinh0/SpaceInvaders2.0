@@ -13,6 +13,7 @@ import spaceInvanders.model.createElements.CreateElements;
 import spaceInvanders.model.movements.MovementAlienFleet;
 import spaceInvanders.model.movements.MovementBullets;
 import spaceInvanders.model.verifications.Verifications;
+import spaceInvanders.utility.Constants;
 import spaceInvanders.utility.DrawUtil;
 import spaceInvanders.utility.SimpleAudioPlayer;
 
@@ -49,6 +50,7 @@ public class Game {
         TerminalFactory.setTerminalEmulatorFontConfiguration(cfg);
         Terminal terminal = TerminalFactory.createTerminal();
 
+        arena = new Arena(createElements);
 
         screen = new TerminalScreen(terminal);
         screen.setCursorPosition(null); // we don't need a cursor
@@ -72,11 +74,11 @@ public class Game {
 
             if (keyPressed != null) {
                 switch (keyPressed.getKeyType()) {
-                    case F1 -> {
+                    case F4 -> {
                         keepRunning = false;
                     }
                     case Enter -> {
-                        arena = new Arena(createElements);
+
                         run();
                     }
                     case Character -> {
@@ -115,13 +117,20 @@ public class Game {
 
             if (key != null) {
                 if (key.getKeyType() == KeyType.Backspace) {
-                   drawMenu(screen);
-                   break;
+                    drawMenu(screen);
+                    break;
                 }
+
             }
         }
 
 
+    }
+
+    private void drawPause(TerminalScreen screen) throws IOException {
+        screen.clear();
+        DrawUtil.drawPause(screen);
+        screen.refresh();
     }
 
 
@@ -144,26 +153,37 @@ public class Game {
         long powerUp2Activated = 0;
         long powerUp3Activated = 0;
 
+        audioPlayer.playBackgroundAudio();
 
         while (keepRunning) {
 
             long startTime = System.currentTimeMillis();
 
-            audioPlayer.playBackgroundAudio();
-            draw();
             KeyStroke key = screen.pollInput();
             if (key != null) {
 
                 if (key.getKeyType() == KeyType.Backspace) {
+                    audioPlayer.stopBackgroundAudio();
                     drawMenu(screen);
 
+                    break;
+
                 }
+
+
+                if (key.getKeyType() == KeyType.F2) {
+                    audioPlayer.stopBackgroundAudio();
+                    drawPause(screen);
+                    break;
+                }
+
 
                 arena.processKey(key);
                 if (key.getKeyType() == KeyType.EOF) {
                     break;
                 }
             }
+            draw();
 
             if (startTime - lastMonsterMovement > moveTimer) {
                 moveAlienFleet.moveAlienFleet(arena.getAlienFleet());
@@ -174,10 +194,9 @@ public class Game {
 
                 verifications.verifyAlienFleetCollision(arena.getBullets(), arena.getAlienFleet());
                 verifications.verifyCollisionBetweenBullets(arena.getBullets(), arena.getEnemyBullets());
-                verifications.verifyPowerUpCollision(arena.getSpaceShip(), arena.getPowerUps());
+                verifications.verifyPowerUpCollision(arena.getSpaceShip(), arena.getPowerUps(), screen);
                 verifications.cleanBullet(arena.getBullets());
 
-                draw();
 
                 lastMonsterMovement = startTime;
             }
@@ -194,31 +213,48 @@ public class Game {
             }
             if (arena.getShootFaster() == 0) {
                 quickFireCount++;
-                System.out.println(100 - quickFireCount);
+                for (int i = 0; i <= 1; i++) {
+                    screen.newTextGraphics().putString(Constants.WIDTH / 2 - 10, Constants.HEIGHT / 2, "power up: SHOOT FASTER");
+                    screen.refresh();
+                    i++;
+                }
+
                 if (quickFireCount == 100) {
                     quickFireCount = 0;
                     arena.setShootFaster(6);
-                    System.out.println("FAST SHOOTING OFF");
+
                 }
+
             }
 
             if (arena.getIsInvincible()) {
                 invincibleCount++;
-                System.out.println(100 - invincibleCount);
+                for (int i = 0; i <= 1; i++) {
+                    screen.newTextGraphics().putString(Constants.WIDTH / 2 - 10, Constants.HEIGHT / 2, "power up: INVINCIBLE");
+                    screen.refresh();
+                    i++;
+                }
+
                 if (invincibleCount == 100) {
                     invincibleCount = 0;
                     arena.setIsInvincible(false);
-                    System.out.println("Invincible OFF");
+
                 }
             }
 
             if (arena.getFireMultipleBullets()) {
                 multipleFireCount++;
-                System.out.println(100 - multipleFireCount);
+                for (int i = 0; i <= 1; i++) {
+                    screen.newTextGraphics().putString(Constants.WIDTH / 2 - 10, Constants.HEIGHT / 2, "power up: MULTIPLE BULLETS");
+                    screen.refresh();
+                    i++;
+
+                }
+
                 if (multipleFireCount == 100) {
                     multipleFireCount = 0;
                     arena.setFireMultipleBullets(false);
-                    System.out.println("Multiple Fire off");
+
                 }
             }
 
@@ -226,19 +262,18 @@ public class Game {
             if (startTime - powerUp1Activated > powerUpTimer) {
                 arena.setShootFaster(3);
                 powerUp1Activated = startTime;
-                System.out.println("FAST SHOOTING OFF");
+
             }
 
             if (startTime - powerUp2Activated > powerUpTimer) {
                 arena.setIsInvincible(false);
                 powerUp2Activated = startTime;
-                System.out.println("INVENCIBILITY OFF");
             }
 
             if (startTime - powerUp3Activated > powerUpTimer) {
                 arena.setFireMultipleBullets(false);
                 powerUp3Activated = startTime;
-                System.out.println("MULTIPLE SHOTS OFF");
+
             }
 
             if (arena.aliensIsEmpty() && arena.getRunTimer() < 80) {

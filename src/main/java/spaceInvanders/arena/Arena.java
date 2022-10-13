@@ -39,7 +39,7 @@ public class Arena {
 
 
 
-    Arena(CreateElements createElements) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public Arena(CreateElements createElements) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 
         this.spaceShip = new SpaceShip(WIDTH / 2, HEIGHT - 1);
         this.alienFleet = createElements.createAlienFleet(20, 5);

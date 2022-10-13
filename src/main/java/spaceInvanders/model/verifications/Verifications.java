@@ -1,9 +1,11 @@
 package spaceInvanders.model.verifications;
 
+import com.googlecode.lanterna.screen.TerminalScreen;
 import spaceInvanders.entities.AlienFleet;
 import spaceInvanders.entities.Bullet;
 import spaceInvanders.entities.PowerUps;
 import spaceInvanders.entities.SpaceShip;
+import spaceInvanders.utility.Constants;
 import spaceInvanders.utility.SimpleAudioPlayer;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -103,7 +105,7 @@ public class Verifications {
         }
     }
 
-    public void verifyPowerUpCollision(SpaceShip spaceShip, List<PowerUps> powerUps) {
+    public void verifyPowerUpCollision(SpaceShip spaceShip, List<PowerUps> powerUps, TerminalScreen screen) throws IOException {
         for (int i = 0; i < powerUps.size(); i++) {
 
             if (powerUps.get(i).getPosition().equals(spaceShip.getPosition())) {
@@ -114,16 +116,17 @@ public class Verifications {
                 switch (powerUpType) {
                     case 0:
                         spaceShip.setShootFaster(0);
-                        System.out.println("shoot faster");
+
                         break;
 
                     case 1:
                         spaceShip.setIsInvincible(true);
-                        System.out.println("invincible");
+
                         break;
 
                     case 2:
                         spaceShip.setFireMultipleBullets(true);
+
                         break;
                 }
             }
