@@ -25,7 +25,7 @@ public class Arena {
     static int WIDTH = Constants.WIDTH;
     static int HEIGHT = Constants.HEIGHT;
 
-    private  SpaceShip spaceShip;
+    private SpaceShip spaceShip;
     private List<Bullet> bullets;
     private List<Bullet> enemyBullets;
     private List<PowerUps> powerUps;
@@ -36,7 +36,6 @@ public class Arena {
     long runTimer = 0;
 
 
-
     public Arena(CreateElements createElements) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 
         this.spaceShip = new SpaceShip(WIDTH / 2, HEIGHT - 1);
@@ -44,7 +43,7 @@ public class Arena {
         this.bullets = new ArrayList<>();
         this.enemyBullets = new ArrayList<>();
         this.powerUps = new ArrayList<>();
-        this.spaceShipHP =  new ArrayList<>();
+        this.spaceShipHP = new ArrayList<>();
 
 
     }
@@ -64,12 +63,15 @@ public class Arena {
     public List<AlienFleet> getAlienFleet() {
         return alienFleet;
     }
+
     public List<Bullet> getEnemyBullets() {
         return enemyBullets;
     }
+
     public List<Bullet> getBullets() {
         return bullets;
     }
+
     public SpaceShip getSpaceShip() {
         return spaceShip;
     }
@@ -158,9 +160,11 @@ public class Arena {
     public boolean getIsInvincible() {
         return spaceShip.getIsInvincible();
     }
+
     public void setIsInvincible(boolean isInvincible) {
         spaceShip.setIsInvincible(isInvincible);
     }
+
     public void setShootFaster(int shootFaster) {
         spaceShip.setShootFaster(shootFaster);
     }
@@ -168,6 +172,7 @@ public class Arena {
     public int getShootFaster() {
         return spaceShip.getShootFaster();
     }
+
     public void setFireMultipleBullets(boolean fireMultipleBullets) {
         spaceShip.setFireMultipleBullets(fireMultipleBullets);
     }
@@ -183,24 +188,29 @@ public class Arena {
     public void setPowerUps(List<PowerUps> powerUps) {
         this.powerUps = powerUps;
     }
-    public void setSpaceShipHP(List<SpaceShipHP> spaceShipHP){
-        this.spaceShipHP=spaceShipHP;
+
+    public void setSpaceShipHP(List<SpaceShipHP> spaceShipHP) {
+        this.spaceShipHP = spaceShipHP;
     }
+
     public long getRunTimer() {
         return runTimer;
     }
+
     public void setRunTimer(long runTimer) {
         this.runTimer = runTimer;
     }
+
     public boolean aliensIsEmpty() {
         return alienFleet.isEmpty();
     }
 
-    public void removeSpaceShip (SpaceShip spaceShip){
-this.spaceShip = null;
+    public void removeSpaceShip(SpaceShip spaceShip) {
+        this.spaceShip = null;
     }
-    public void setSpaceShip (SpaceShip spaceShip){
-        this.spaceShip=spaceShip;
+
+    public void setSpaceShip(SpaceShip spaceShip) {
+        this.spaceShip = spaceShip;
     }
 
 }

@@ -19,7 +19,7 @@ class SpaceShipTest {
     @Mock
     Position position;
     @InjectMocks
-    SpaceShip spaceShip = new SpaceShip(0, 0);
+    SpaceShip spaceShip = new SpaceShip(0,0);
 
     @BeforeEach
     void setUp() {
@@ -52,7 +52,7 @@ class SpaceShipTest {
         TextGraphics graphics = mock(TextGraphics.class);
 
         spaceShip.drawElements(graphics, "#ff0000", "/");
-
     }
+
 }
 
